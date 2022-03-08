@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 18:17:42 by iren              #+#    #+#             */
-/*   Updated: 2022/03/08 22:15:11 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/08 23:10:50 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,30 @@ char	*get_cmd(char **split, char *cmd)
 		split++;
 	}
 	return (NULL);
+}
+
+void	free_tpipex(t_pipex *pp)
+{
+	int	i;
+
+	i = 0;
+	if (pp->splitpaths != 0)
+	{
+		while (pp->splitpaths[i] != 0)
+		{
+			free(pp->splitpaths[i]);
+			i++;
+		}
+		free(pp->splitpaths);
+	}
+	i = 0;
+	if (pp->cmdnargs != 0)
+	{
+		while (pp->cmdnargs[i] != 0)
+		{
+			free(pp->cmdnargs[i]);
+			i++;
+		}
+		free(pp->cmdnargs);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:06:27 by iren              #+#    #+#             */
-/*   Updated: 2022/03/08 22:16:05 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/08 23:10:02 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	child2(t_pipex *pp)
 	close(pp->ends[0]);
 	dup2(pp->outfile, STDOUT_FILENO);
 	pp->cmdnargs = ft_split(pp->raw_av[3], ' ');
+	free(pp->cmd);
 	pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
 	if (!pp->cmd)
 		piperror(ERR_CMD);
@@ -43,8 +44,11 @@ static void	child2(t_pipex *pp)
 static void	init(t_pipex *pp, char **av, char **env)
 {
 	pp->env = env;
-	pp->err_counter = 0;
 	pp->raw_av = av;
+	pp->err_counter = 0;
+	pp->splitpaths = 0;
+	pp->cmdnargs = 0;
+	pp->cmd = 0;
 	pipe(pp->ends);
 	pp->infile = open_file(pp->raw_av[1], O_RDONLY);
 	pp->outfile = open_file(pp->raw_av[4], O_CREAT | O_RDWR | O_TRUNC);
@@ -83,5 +87,6 @@ int	main(int ac, char **av, char **env)
 	close(pp.ends[0]);
 	close(pp.ends[1]);
 	ft_wait(&pp);
+	free_tpipex(&pp);
 	return (pp.err_counter);
 }

@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:07:33 by iren              #+#    #+#             */
-/*   Updated: 2022/03/08 22:21:34 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/08 22:49:40 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int		open_file(char *filename, int flags);
 char	*find_path(char **env);
 char	*get_cmd(char **split, char *cmd);
 void	piperror(const char *s);
+void	free_tpipex(t_pipex *pp);
 
 #endif
