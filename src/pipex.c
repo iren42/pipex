@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:06:27 by iren              #+#    #+#             */
-/*   Updated: 2022/03/09 21:10:22 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/09 21:40:44 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ static void	child1(t_pipex *pp)
 	close(pp->ends[1]);
 	dup2(pp->infile, STDIN_FILENO);
 	pp->cmdnargs = ft_split(pp->raw_av[2], ' ');
+	if (pp->cmdnargs != 0)
+	{
+		if (!ft_strncmp(pp->cmdnargs[0], "/", 1))
+			pp->cmd = pp->cmdnargs[0];
+		else
+			pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
+	}
 	pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
 	if (!pp->cmd)
 	{
@@ -39,7 +46,13 @@ static void	child2(t_pipex *pp)
 	close(pp->ends[0]);
 	dup2(pp->outfile, STDOUT_FILENO);
 	pp->cmdnargs = ft_split(pp->raw_av[3], ' ');
-	pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
+	if (pp->cmdnargs != 0)
+	{
+		if (!ft_strncmp(pp->cmdnargs[0], "/", 1))
+			pp->cmd = pp->cmdnargs[0];
+		else
+			pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
+	}
 	if (!pp->cmd)
 	{
 		free_tpipex(pp);
@@ -79,8 +92,6 @@ static void	ft_wait(t_pipex *pp)
 	int	status;
 
 	waitpid(pp->pid1, &status, 0);
-	if (WIFEXITED(status))
-		pp->err_counter = WEXITSTATUS(status);
 	waitpid(pp->pid2, &status, 0);
 	if (WIFEXITED(status))
 		pp->err_counter = WEXITSTATUS(status);
