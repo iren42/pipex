@@ -6,16 +6,17 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 18:17:42 by iren              #+#    #+#             */
-/*   Updated: 2022/03/08 23:10:50 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/09 11:20:33 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	piperror(const char *s)
+void	piperror(const char *s, int errcode)
 {
+	(void)errcode;
 	perror(s);
-	exit(EXIT_FAILURE);
+	exit(1);
 }
 
 int	open_file(char *filename, int flags)
@@ -25,7 +26,7 @@ int	open_file(char *filename, int flags)
 	fd = open(filename, flags, 0644);
 	if (fd == -1)
 	{
-		piperror("Could not open fd\n");
+		piperror(ERR_FD, errno);
 	}
 	return (fd);
 }
@@ -70,6 +71,7 @@ void	free_tpipex(t_pipex *pp)
 			i++;
 		}
 		free(pp->splitpaths);
+		pp->splitpaths = 0;
 	}
 	i = 0;
 	if (pp->cmdnargs != 0)
@@ -80,5 +82,6 @@ void	free_tpipex(t_pipex *pp)
 			i++;
 		}
 		free(pp->cmdnargs);
+		pp->cmdnargs = 0;
 	}
 }

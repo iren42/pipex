@@ -6,7 +6,7 @@
 #    By: iren <iren@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 17:41:07 by iren              #+#    #+#              #
-#    Updated: 2022/03/08 22:22:25 by iren             ###   ########.fr        #
+#    Updated: 2022/03/08 23:43:25 by iren             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ HEADER	= include/pipex.h
 DIR_SOURCES	= src/
 
 SOURCES		=	pipex.c \
-				utils.c
+				utils.c \
+				free.c
 
 SRCS	=	$(addprefix $(DIR_SOURCES), $(SOURCES))
 
