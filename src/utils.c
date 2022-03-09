@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 18:17:42 by iren              #+#    #+#             */
-/*   Updated: 2022/03/09 11:20:33 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/09 21:11:45 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,8 @@
 
 void	piperror(const char *s, int errcode)
 {
-	(void)errcode;
 	perror(s);
-	exit(1);
-}
-
-int	open_file(char *filename, int flags)
-{
-	int	fd;
-
-	fd = open(filename, flags, 0644);
-	if (fd == -1)
-	{
-		piperror(ERR_FD, errno);
-	}
-	return (fd);
+	exit(errcode);
 }
 
 char	*find_path(char **env)

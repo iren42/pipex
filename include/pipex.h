@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:07:33 by iren              #+#    #+#             */
-/*   Updated: 2022/03/09 14:11:43 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/09 21:02:40 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 
 # include "libft.h"
 
-# define ERR_CMD "Error command not found"
-# define CERR_CMD 0
+# define ERR_CMD1 "Error command not found: cmd1"
+# define ERR_CMD2 "Error command not found: cmd2"
+# define CERR_CMD 127
 # define ERR_ARGS "Error number of arguments"
 # define CERR_ARGS 1
 # define ERR_FORK "Error fork()"
@@ -32,7 +33,7 @@
 # define ERR_EXEC "Error execve()"
 # define CERR_EXEC 1
 # define ERR_FD "Error open()"
-# define CERR_FD 1 
+# define CERR_FD 1
 
 typedef struct s_pipex
 {
