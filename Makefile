@@ -6,7 +6,7 @@
 #    By: iren <iren@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 17:41:07 by iren              #+#    #+#              #
-#    Updated: 2022/03/10 09:50:56 by iren             ###   ########.fr        #
+#    Updated: 2022/03/10 10:13:45 by iren             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,15 +30,14 @@ OBJS	= $(SRCS:.c=.o)
 
 CC		= gcc
 
-CFLAGS	= 
-#-Wall -Wextra -Werror 
+CFLAGS	= -Wall -Wextra -Werror 
 
 RM		= rm -f
 
 all		: $(NAME)
 
 %.o		: %.c $(HEADER)
-		$(CC) $(CFLAGS) -Iinclude -g -c $< -o $@
+		$(CC) $(CFLAGS) -Iinclude -c $< -o $@
 
 $(NAME) : $(OBJS) $(HEADER)
 	  	$(CC) -o $@ $(OBJS)
@@ -46,17 +45,14 @@ $(NAME) : $(OBJS) $(HEADER)
 
 norm	:
 		norminette $(SRCS)
-		norminette -R CheckDefine $(HEADER)
+		norminette $(HEADER)
 
 clean	:
 		$(RM) $(OBJS)
-		$(RM) $(OBJS:.o=.d)
 
 fclean	: clean
 		$(RM) $(NAME)
 
 re		: fclean all
-
--include $(OBJS:.o=.d)
 
 .PHONY:	all clean fclean re

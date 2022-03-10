@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:06:27 by iren              #+#    #+#             */
-/*   Updated: 2022/03/09 21:40:44 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/10 10:29:27 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ static void	child1(t_pipex *pp)
 			pp->cmd = pp->cmdnargs[0];
 		else
 			pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
-	}
-	pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
-	if (!pp->cmd)
-	{
-		free_tpipex(pp);
-		piperror(ERR_CMD1, CERR_CMD);
-	}
-	if (execve(pp->cmd, pp->cmdnargs, pp->env) == -1)
-	{
-		free_tpipex(pp);
-		piperror(ERR_EXEC, CERR_EXEC);
+		pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
+		if (!pp->cmd)
+		{
+			free_tpipex(pp);
+			piperror(ERR_CMD1, CERR_CMD);
+		}
+		if (execve(pp->cmd, pp->cmdnargs, pp->env) == -1)
+		{
+			free_tpipex(pp);
+			piperror(ERR_EXEC, CERR_EXEC);
+		}
 	}
 }
 
@@ -52,16 +52,16 @@ static void	child2(t_pipex *pp)
 			pp->cmd = pp->cmdnargs[0];
 		else
 			pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
-	}
-	if (!pp->cmd)
-	{
-		free_tpipex(pp);
-		piperror(ERR_CMD2, CERR_CMD);
-	}
-	if (execve(pp->cmd, pp->cmdnargs, pp->env) == -1)
-	{
-		free_tpipex(pp);
-		piperror(ERR_EXEC, CERR_EXEC);
+		if (!pp->cmd)
+		{
+			free_tpipex(pp);
+			piperror(ERR_CMD2, CERR_CMD);
+		}
+		if (execve(pp->cmd, pp->cmdnargs, pp->env) == -1)
+		{
+			free_tpipex(pp);
+			piperror(ERR_EXEC, CERR_EXEC);
+		}
 	}
 }
 

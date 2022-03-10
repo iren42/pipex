@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:07:33 by iren              #+#    #+#             */
-/*   Updated: 2022/03/10 09:56:05 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/10 10:15:21 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_pipex
 char	*find_path(char **env);
 char	*get_cmd(char **split, char *cmd);
 void	piperror(const char *s, int errcode);
-void	free_tpipex(t_pipex *pp);
+void	free_tpipex(t_pipex *p);
 
 char	**ft_split(char const *str, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

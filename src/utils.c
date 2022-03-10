@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 18:17:42 by iren              #+#    #+#             */
-/*   Updated: 2022/03/09 21:11:45 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/10 10:41:26 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*get_cmd(char **split, char *cmd)
 	char	*tmp;
 	char	*res;
 
+	tmp = 0;
+	res = 0;
 	while (*split)
 	{
 		tmp = ft_strjoin(*split, "/");
