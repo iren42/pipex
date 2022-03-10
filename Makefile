@@ -6,7 +6,7 @@
 #    By: iren <iren@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 17:41:07 by iren              #+#    #+#              #
-#    Updated: 2022/03/10 10:13:45 by iren             ###   ########.fr        #
+#    Updated: 2022/03/10 18:03:50 by iren             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS	=	$(addprefix $(DIR_SOURCES), $(SOURCES))
 
 OBJS	= $(SRCS:.c=.o)
 
-CC		= gcc
+CC		= clang
 
 CFLAGS	= -Wall -Wextra -Werror 
 
