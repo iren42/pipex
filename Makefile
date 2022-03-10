@@ -6,15 +6,11 @@
 #    By: iren <iren@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 17:41:07 by iren              #+#    #+#              #
-#    Updated: 2022/03/08 23:43:25 by iren             ###   ########.fr        #
+#    Updated: 2022/03/10 09:50:56 by iren             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= pipex
-
-LIBFT	= libft
-
-LIBFTPRINTF	= ft_printf
 
 HEADER	= include/pipex.h
 
@@ -22,7 +18,11 @@ DIR_SOURCES	= src/
 
 SOURCES		=	pipex.c \
 				utils.c \
-				free.c
+				ft_putstr_fd.c \
+				ft_split.c \
+				ft_strjoin.c \
+				ft_strncmp.c 
+
 
 SRCS	=	$(addprefix $(DIR_SOURCES), $(SOURCES))
 
@@ -40,11 +40,8 @@ all		: $(NAME)
 %.o		: %.c $(HEADER)
 		$(CC) $(CFLAGS) -Iinclude -g -c $< -o $@
 
-$(NAME) : $(OBJS) $(HEADER) $(LIBFT)
-		make -C $(LIBFT)
-		make bonus -C $(LIBFT)
-	  	$(CC) -o $@ $(OBJS) libft/libft.a
-#	  $(CC) -o $@ $(OBJS) ft_printf/libftprintf.a
+$(NAME) : $(OBJS) $(HEADER)
+	  	$(CC) -o $@ $(OBJS)
 	
 
 norm	:
@@ -53,7 +50,6 @@ norm	:
 
 clean	:
 		$(RM) $(OBJS)
-		make clean -C $(LIBFT)
 		$(RM) $(OBJS:.o=.d)
 
 fclean	: clean

@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:07:33 by iren              #+#    #+#             */
-/*   Updated: 2022/03/09 21:02:40 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/10 09:56:05 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <stdio.h>
-# include <errno.h>
-
-# include "libft.h"
+# include <stdlib.h>
 
 # define ERR_CMD1 "Error command not found: cmd1"
 # define ERR_CMD2 "Error command not found: cmd2"
@@ -50,11 +48,14 @@ typedef struct s_pipex
 	char	**splitpaths;
 }				t_pipex;
 
-int		open_file(char *filename, int flags);
 char	*find_path(char **env);
 char	*get_cmd(char **split, char *cmd);
 void	piperror(const char *s, int errcode);
 void	free_tpipex(t_pipex *pp);
-void	free_split(char **split);
+
+char	**ft_split(char const *str, char c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_putstr_fd(char *s, int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif
