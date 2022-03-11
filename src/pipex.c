@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:06:27 by iren              #+#    #+#             */
-/*   Updated: 2022/03/10 17:43:15 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/11 16:56:23 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ static void	child1(t_pipex *pp)
 		if (!ft_strncmp(pp->cmdnargs[0], "/", 1))
 			pp->cmd = pp->cmdnargs[0];
 		else
-			pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
-		pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
+			pp->cmd = get_cmd(pp->env, pp->cmdnargs[0]);
 		if (!pp->cmd)
 		{
 			free_tpipex(pp);
-			piperror(ERR_CMD1, CERR_CMD);
+			piperror(ERR_CMD, CERR_CMD);
 		}
 		if (execve(pp->cmd, pp->cmdnargs, pp->env) == -1)
 		{
@@ -51,11 +50,11 @@ static void	child2(t_pipex *pp)
 		if (!ft_strncmp(pp->cmdnargs[0], "/", 1))
 			pp->cmd = pp->cmdnargs[0];
 		else
-			pp->cmd = get_cmd(pp->splitpaths, pp->cmdnargs[0]);
+			pp->cmd = get_cmd(pp->env, pp->cmdnargs[0]);
 		if (!pp->cmd)
 		{
 			free_tpipex(pp);
-			piperror(ERR_CMD2, CERR_CMD);
+			piperror(ERR_CMD, CERR_CMD);
 		}
 		if (execve(pp->cmd, pp->cmdnargs, pp->env) == -1)
 		{
@@ -70,11 +69,10 @@ static void	init(t_pipex *pp, char **av, char **env)
 	pp->env = env;
 	pp->raw_av = av;
 	pp->err_counter = 0;
-	pp->splitpaths = 0;
 	pp->cmdnargs = 0;
 	pp->cmd = 0;
 	pipe(pp->ends);
-	pp->outfile = open(pp->raw_av[4], O_CREAT | O_RDWR | O_TRUNC);
+	pp->outfile = open(pp->raw_av[4], O_CREAT | O_RDWR | O_TRUNC, 0664);
 	pp->infile = open(pp->raw_av[1], O_RDONLY);
 	if (pp->infile == -1)
 	{
@@ -84,7 +82,6 @@ static void	init(t_pipex *pp, char **av, char **env)
 	}
 	if (pp->outfile == -1)
 		piperror(ERR_FD, CERR_FD);
-	pp->splitpaths = ft_split(find_path(pp->env), ':');
 }
 
 static void	ft_wait(t_pipex *pp)

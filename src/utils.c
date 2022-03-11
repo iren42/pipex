@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 18:17:42 by iren              #+#    #+#             */
-/*   Updated: 2022/03/10 10:41:26 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/11 16:54:22 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,59 +18,66 @@ void	piperror(const char *s, int errcode)
 	exit(errcode);
 }
 
-char	*find_path(char **env)
+static char	*find_path(char **env)
 {
-	while (ft_strncmp("PATH=", *env, 5))
-		env++;
-	return (*env + 5);
+	if (env != 0)
+	{
+		while (*env != 0)
+		{
+			if (ft_strncmp("PATH=", *env, 5) == 0)
+				return (*env + 5);
+			env++;
+		}
+	}
+	return (0);
 }
 
-char	*get_cmd(char **split, char *cmd)
+static void	init_get_cmd(char **tmp, char **res, char ***splitpaths, int *i)
+{
+	*tmp = 0;
+	*res = 0;
+	*splitpaths = 0;
+	*i = 0;
+}
+
+static char	**get_splitpaths(char **env)
+{
+	char	**res;
+	char	*path;
+
+	res = 0;
+	path = find_path(env);
+	if (path == 0)
+		return (0);
+	res = ft_split(path, ':');
+	return (res);
+}
+
+char	*get_cmd(char **env, char *cmd)
 {
 	char	*tmp;
 	char	*res;
+	char	**splitpaths;
+	int		i;
 
-	tmp = 0;
-	res = 0;
-	while (*split)
+	init_get_cmd(&tmp, &res, &splitpaths, &i);
+	splitpaths = get_splitpaths(env);
+	if (splitpaths != 0)
 	{
-		tmp = ft_strjoin(*split, "/");
-		res = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (access(res, R_OK | X_OK) == 0)
+		while (splitpaths[i])
 		{
-			return (res);
-		}
-		free(res);
-		split++;
-	}
-	return (NULL);
-}
-
-void	free_tpipex(t_pipex *pp)
-{
-	int	i;
-
-	i = 0;
-	if (pp->splitpaths != 0)
-	{
-		while (pp->splitpaths[i] != 0)
-		{
-			free(pp->splitpaths[i]);
+			tmp = ft_strjoin(splitpaths[i], "/");
+			res = ft_strjoin(tmp, cmd);
+			free(tmp);
+			if (access(res, X_OK) == 0)
+			{
+				free_split(splitpaths);
+				return (res);
+			}
+			free(res);
 			i++;
 		}
-		free(pp->splitpaths);
-		pp->splitpaths = 0;
+		free_split(splitpaths);
 	}
-	i = 0;
-	if (pp->cmdnargs != 0)
-	{
-		while (pp->cmdnargs[i] != 0)
-		{
-			free(pp->cmdnargs[i]);
-			i++;
-		}
-		free(pp->cmdnargs);
-		pp->cmdnargs = 0;
-	}
+	return (0);
 }
