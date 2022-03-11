@@ -6,7 +6,7 @@
 #    By: iren <iren@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 17:41:07 by iren              #+#    #+#              #
-#    Updated: 2022/03/11 16:54:09 by iren             ###   ########.fr        #
+#    Updated: 2022/03/11 17:16:29 by iren             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ RM		= rm -f
 all		: $(NAME)
 
 %.o		: %.c $(HEADER)
-		$(CC) $(CFLAGS) -Iinclude -g -c $< -o $@
+		$(CC) $(CFLAGS) -Iinclude -c $< -o $@
 #		$(CC) $(CFLAGS) $(SANI) -Iinclude -c $< -o $@
 
 $(NAME) : $(OBJS) $(HEADER)
