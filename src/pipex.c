@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:06:27 by iren              #+#    #+#             */
-/*   Updated: 2022/03/11 16:56:23 by iren             ###   ########.fr       */
+/*   Updated: 2022/03/11 17:08:55 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	init(t_pipex *pp, char **av, char **env)
 	{
 		ft_putstr_fd("       0\n", pp->outfile);
 		close(pp->outfile);
-		exit(0);
+		piperror(ERR_FD, 0);
 	}
 	if (pp->outfile == -1)
 		piperror(ERR_FD, CERR_FD);
