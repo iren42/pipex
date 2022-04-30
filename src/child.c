@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:06:27 by iren              #+#    #+#             */
-/*   Updated: 2022/04/30 17:55:04 by iren             ###   ########.fr       */
+/*   Updated: 2022/04/30 20:27:19 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -17,7 +17,10 @@ static void	child_con(t_pipex *pp)
 	{
 		pp->cmd = pp->cmdnargs[0];
 		if (access(pp->cmd, X_OK) != 0)
+		{
+			free_split(pp->cmdnargs);
 			piperror(ERR_CMD, CERR_CMD);
+		}
 	}
 	else
 		pp->cmd = get_cmd(pp->env, pp->cmdnargs[0]);
