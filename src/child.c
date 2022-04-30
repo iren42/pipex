@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:06:27 by iren              #+#    #+#             */
-/*   Updated: 2022/04/30 17:14:04 by iren             ###   ########.fr       */
+/*   Updated: 2022/04/30 17:55:04 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -14,24 +14,23 @@
 static void	child_con(t_pipex *pp)
 {
 	if (!ft_strncmp(pp->cmdnargs[0], "/", 1))
-		{
-			pp->cmd = pp->cmdnargs[0];
-			if (access(pp->cmd, X_OK) != 0)
-				piperror(ERR_CMD, CERR_CMD);
-		}
-		else
-			pp->cmd = get_cmd(pp->env, pp->cmdnargs[0]);
-		if (!pp->cmd)
-		{
-			free_tpipex(pp);
+	{
+		pp->cmd = pp->cmdnargs[0];
+		if (access(pp->cmd, X_OK) != 0)
 			piperror(ERR_CMD, CERR_CMD);
-		}
-		if (execve(pp->cmd, pp->cmdnargs, pp->env) == -1)
-		{
-			free_tpipex(pp);
-			piperror(ERR_EXEC, CERR_EXEC);
-		}
-
+	}
+	else
+		pp->cmd = get_cmd(pp->env, pp->cmdnargs[0]);
+	if (!pp->cmd)
+	{
+		free_tpipex(pp);
+		piperror(ERR_CMD, CERR_CMD);
+	}
+	if (execve(pp->cmd, pp->cmdnargs, pp->env) == -1)
+	{
+		free_tpipex(pp);
+		piperror(ERR_EXEC, CERR_EXEC);
+	}
 }
 
 void	child1(t_pipex *pp)
