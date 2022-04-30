@@ -6,7 +6,7 @@
 #    By: iren <iren@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 17:41:07 by iren              #+#    #+#              #
-#    Updated: 2022/04/30 14:48:35 by iren             ###   ########.fr        #
+#    Updated: 2022/04/30 17:30:02 by iren             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ HEADER	= include/pipex.h
 DIR_SOURCES	= src/
 
 SOURCES		=	pipex.c \
+				child.c \
 				utils.c \
 				free.c \
 				ft_putstr_fd.c \

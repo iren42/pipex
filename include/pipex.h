@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:07:33 by iren              #+#    #+#             */
-/*   Updated: 2022/03/11 16:53:55 by iren             ###   ########.fr       */
+/*   Updated: 2022/04/30 17:15:02 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,8 @@ char	**ft_split(char const *str, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
+
+void	child1(t_pipex *p);
+void	child2(t_pipex *p);
 
 #endif
