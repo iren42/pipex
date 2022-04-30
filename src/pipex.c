@@ -6,7 +6,7 @@
 /*   By: iren <iren@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:06:27 by iren              #+#    #+#             */
-/*   Updated: 2022/03/11 17:08:55 by iren             ###   ########.fr       */
+/*   Updated: 2022/04/30 14:36:27 by iren             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	init(t_pipex *pp, char **av, char **env)
 	pp->infile = open(pp->raw_av[1], O_RDONLY);
 	if (pp->infile == -1)
 	{
-		ft_putstr_fd("       0\n", pp->outfile);
+		ft_putstr_fd("0\n", pp->outfile);
 		close(pp->outfile);
 		piperror(ERR_FD, 0);
 	}
