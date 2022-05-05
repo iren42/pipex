@@ -6,7 +6,7 @@
 #    By: iren <iren@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 17:41:07 by iren              #+#    #+#              #
-#    Updated: 2022/04/30 17:30:02 by iren             ###   ########.fr        #
+#    Updated: 2022/05/05 20:38:28 by iren             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SOURCES		=	pipex.c \
 				child.c \
 				utils.c \
 				free.c \
+				piperror.c \
 				ft_putstr_fd.c \
 				ft_split.c \
 				ft_strjoin.c \
